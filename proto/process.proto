@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package rwitesh;
 
+import "memory.proto";
+
 option go_package = "./pb";
 
 message CPU {
@@ -18,4 +20,5 @@ message GPU {
   string name = 2;
   float min_ghz = 3;
   float max_ghz = 4;
+  Memory memory = 5;
 }
