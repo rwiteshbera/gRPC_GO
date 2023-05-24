@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 	"log"
-	"rpcProject/chat"
+	"rpcProject/pb"
 
 	"google.golang.org/grpc"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 func main() {
@@ -17,16 +18,12 @@ func main() {
 	}
 	defer connection.Close()
 
-	c := chat.NewChatServiceClient(connection)
+	c := pb.NewLaptopGuideClient(connection)
 
-	message := chat.Message{
-		Body: "Hi, I am client",
-	}
-
-	resp, err := c.SayHello(context.Background(), &message)
+	resp, err := c.CreateNew(context.Background(), &emptypb.Empty{})
 	if err != nil {
-		log.Fatalf("Error when calling SayHello: %s", err)
+		log.Fatalf("Error when calling: %s", err)
 	}
 
-	log.Printf("Response from server: %s", resp.Body)
+	log.Printf("Response from server: %s", resp)
 }
