@@ -10,6 +10,7 @@ import "storage.proto";
 import "screen.proto";
 import "keyboard.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
 message Laptop {
     string id = 1;
@@ -30,4 +31,9 @@ message Laptop {
     double price_inr = 12;
     uint32 release_year = 13;
     google.protobuf.Timestamp updated_at = 14;
+}
+
+service LaptopGuide {
+    // Unary Communication
+    rpc CreateNew(google.protobuf.Empty) returns (Laptop) {};
 }
